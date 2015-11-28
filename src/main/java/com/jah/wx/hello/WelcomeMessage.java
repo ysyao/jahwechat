@@ -1,6 +1,7 @@
-package com.jah.wx.hello.model;
+package com.jah.wx.hello;
 
 public class WelcomeMessage {
+    private int id;
     private String message;
     private String name;
 
@@ -20,5 +21,13 @@ public class WelcomeMessage {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }
