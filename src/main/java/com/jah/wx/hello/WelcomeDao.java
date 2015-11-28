@@ -5,4 +5,5 @@ package com.jah.wx.hello;
  */
 public interface WelcomeDao {
     public WelcomeMessage getUserById(int id);
+    public int addUser(WelcomeMessage welcomeMessage);
 }
