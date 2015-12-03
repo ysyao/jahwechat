@@ -67,4 +67,8 @@
             <ref bean="dataSource" />
         </property>
     </bean>
+
+    <!--加密解密json-->
+    <bean id="jsonEncrypter"
+          class="com.jah.wx.utils.JsonEncrypter" />
 </beans>

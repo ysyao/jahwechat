@@ -1,20 +1,22 @@
 package com.jah.wx.hello;
 
 import com.jah.wx.pojo.ReturnMessage;
+import com.jah.wx.utils.JsonEncrypter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
-import org.springframework.http.converter.json.Jackson2ObjectMapperFactoryBean;
-import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/")
 public class WelcomeController {
     @Autowired
+    private ResourceLoader resourceLoader;
+    @Autowired
     private WelcomeManager welcomeManager;
     @Autowired
     private WelcomeDao welcomeDao;
+    @Autowired
+    private JsonEncrypter jsonEncrypter;
 
     @RequestMapping(value = "hello", method = RequestMethod.GET)
     public @ResponseBody WelcomeMessage welcome() {
@@ -25,7 +27,7 @@ public class WelcomeController {
     }
 
     @RequestMapping(value = "hello/{id}", method = RequestMethod.GET)
-    public @ResponseBody ReturnMessage<WelcomeMessage, Void> getUserById(@PathVariable("id") int id) {
+    public @ResponseBody ReturnMessage<WelcomeMessage, Void> getUserById(@PathVariable("id") int id) throws Exception {
         ReturnMessage<WelcomeMessage, Void> returnMessage = new ReturnMessage<WelcomeMessage, Void>();
         WelcomeMessage welcomeMessage = welcomeDao.getUserById(id);
         if (welcomeMessage == null) {
@@ -35,8 +37,10 @@ public class WelcomeController {
             returnMessage.setCode(0);
             returnMessage.setObject(welcomeMessage);
             returnMessage.setMessage("success");
+            String encryStr = jsonEncrypter.encryptObject(welcomeMessage);
+            returnMessage.setEncrytedJson(encryStr);
+            returnMessage.setDecrytedJson(jsonEncrypter.decryptObject(encryStr));
         }
-
         return returnMessage;
     }
 

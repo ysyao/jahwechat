@@ -7,6 +7,24 @@ public class ReturnMessage<T, V> {
     private List<V> list;
     private int code;
     private String message;
+    private String encrytedJson;
+    private String decrytedJson;
+
+    public String getEncrytedJson() {
+        return encrytedJson;
+    }
+
+    public void setEncrytedJson(String encrytedJson) {
+        this.encrytedJson = encrytedJson;
+    }
+
+    public String getDecrytedJson() {
+        return decrytedJson;
+    }
+
+    public void setDecrytedJson(String decrytedJson) {
+        this.decrytedJson = decrytedJson;
+    }
 
     public T getObject() {
         return object;
