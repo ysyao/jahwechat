@@ -7,7 +7,6 @@ import org.springframework.jdbc.core.PreparedStatementSetter;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Repository;
-import sun.jdbc.odbc.ee.DataSource;
 
 import java.beans.ConstructorProperties;
 import java.sql.PreparedStatement;
